@@ -18,7 +18,7 @@ public class Challenge42Test {
 
   @BeforeEach
   void init() {
-    when(auditConfiguration.getApiKey()).thenReturn("qemGhPXJjmipa9O7cYBJnuO79BQg");
+    when(auditConfiguration.getApiKey()).thenReturn(System.getProperty("WRONGSECRETS_TEST_API_KEY", System.getenv().getOrDefault("WRONGSECRETS_TEST_API_KEY", "DUMMY_TEST_KEY"))); // intent:SPACE-129070-no-hardcoded-test-token
   }
 
   @Test

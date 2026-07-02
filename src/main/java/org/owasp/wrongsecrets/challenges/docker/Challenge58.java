@@ -16,9 +16,13 @@ public class Challenge58 implements Challenge {
 
   // Simulated database connection string with embedded credentials
   private static final String DB_CONNECTION_STRING =
-      "jdbc:postgresql://db.example.com:5432/userdb?user=dbadmin&password=SuperSecretDB2024!&ssl=true";
+      "jdbc:postgresql://db.example.com:5432/userdb?user=dbadmin&password="
+          + System.getProperty("WRONGSECRETS_DB_PASSWORD", System.getenv().getOrDefault("WRONGSECRETS_DB_PASSWORD", ""))
+          + "&ssl=true";
 
-  private static final String EXPECTED_SECRET = "SuperSecretDB2024!";
+  private static final String EXPECTED_SECRET =
+      System.getProperty("WRONGSECRETS_EXPECTED_SECRET", System.getenv().getOrDefault("WRONGSECRETS_EXPECTED_SECRET", ""));
+  // intent:SPACE-129070-ch58-runtime-secrets
 
   @Override
   public Spoiler spoiler() {
